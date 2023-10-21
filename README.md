@@ -1,19 +1,19 @@
-# react-figma-plugin-starter
+# figma-font-awesome-plugin
 
-Develop Figma plugins quickly using React and TailwindCSS.
+Font Awesome Icon plugin for Figma
 
 ## Getting Started
 
 1. Clone the project
 
 ```sh
-git clone https://github.com/feelCrazy/react-figma-plugin-starter.git
+git clone https://github.com/feelCrazy/figma-font-awesome-plugin.git
 ```
 
 2. Install the dependencies
 
 ```sh
-cd react-figma-plugin-starter
+cd figma-font-awesome-plugin
 
 bun i
 or
@@ -32,6 +32,6 @@ pnpm build
 
 5. Go to `Menu > Plugins > Development > New Plugin...`
 
-6. Choose `react-figma-plugin-starter/manifest.json`
+6. Choose `figma-font-awesome-plugin/manifest.json`
 
-7. Run the plugin by going to `Menu > Plugins > Development > React-Figma-Plugin-Starter`
+7. Run the plugin by going to `Menu > Plugins > Development > figma-font-awesome-plugin`
