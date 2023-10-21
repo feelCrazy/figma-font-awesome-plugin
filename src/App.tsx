@@ -20,7 +20,7 @@ export default function App() {
   }, [])
 
   return (
-    <main className='flex flex-col h-full overflow-scroll'>
+    <main className='flex flex-col h-full overflow-scroll bg-white'>
       <Header />
       <section className='px-4'>
         <Container />
