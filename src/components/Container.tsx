@@ -15,7 +15,7 @@ export default function Container() {
   const [search, setSearch] = useState("")
   const deferredSearch = useDeferredValue(search)
 
-  const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onClick = (e: React.MouseEvent<HTMLDivElement>, itemName: string) => {
     parent.postMessage(
       {
         pluginMessage: {
@@ -23,6 +23,7 @@ export default function Container() {
           files: {
             type: "image/svg+xml",
             data: e.currentTarget.innerHTML,
+            name: itemName,
           },
         },
       },
@@ -30,7 +31,7 @@ export default function Container() {
     )
   }
 
-  const onDrag = (e: React.DragEvent<HTMLDivElement>) => {
+  const onDrag = (e: React.DragEvent<HTMLDivElement>, itemName: string) => {
     parent.postMessage(
       {
         pluginDrop: {
@@ -42,7 +43,7 @@ export default function Container() {
               data: e.currentTarget.innerHTML,
             },
           ],
-          dropMetadata: {},
+          dropMetadata: { name: itemName },
         },
       },
       "*"
@@ -66,8 +67,8 @@ export default function Container() {
         >
           <div
             draggable='true'
-            onClick={onClick}
-            onDragEnd={onDrag}
+            onClick={(e) => onClick(e, item)}
+            onDragEnd={(e) => onDrag(e, item)}
             className='p-3 flex justify-center items-center'
           >
             {

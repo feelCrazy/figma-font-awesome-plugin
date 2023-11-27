@@ -23,21 +23,28 @@ const loadFirst = (msg: { type: string }) => {
   }
 }
 
-const clickIcon = (msg: { files: any; type: string }) => {
+const clickIcon = (msg: {
+  files: { name: string; data: string }
+  type: string
+}) => {
   if (msg.type === "drawIcon") {
+    const { name, data } = msg.files
     const randomPosition = () => Math.floor(Math.random() * (100 - 0 + 1) + 0)
-    const icon = figma.createNodeFromSvg(msg.files.data)
-    icon.x = Math.round(figma.viewport.center.x + randomPosition())
-    icon.y = Math.round(figma.viewport.center.y + randomPosition())
-    figma.currentPage.selection = [icon]
+    const newName = figma.createNodeFromSvg(data)
+    newName.x = Math.round(figma.viewport.center.x + randomPosition())
+    newName.y = Math.round(figma.viewport.center.y + randomPosition())
+    newName.name = name
+    figma.currentPage.selection = [newName]
   }
 }
 
-const dropIcon = ({ items, absoluteX, absoluteY }: DropEvent) => {
+const dropIcon = ({ items, absoluteX, absoluteY, dropMetadata }: DropEvent) => {
   if (items.length > 0 && items[0].type === "image/svg+xml") {
-    const newNode = figma.createNodeFromSvg(items[0].data)
+    const { data } = items[0]
+    const newNode = figma.createNodeFromSvg(data)
     newNode.x = absoluteX
     newNode.y = absoluteY
+    newNode.name = dropMetadata.name
     figma.currentPage.selection = [newNode]
   }
 }
